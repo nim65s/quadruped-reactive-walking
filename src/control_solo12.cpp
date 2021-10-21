@@ -25,8 +25,8 @@ using namespace odri_control_interface;
 /// \param[in] controller Main controller object
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
-// int put_on_the_floor(std::shared_ptr<Robot> robot, Vector12 const& q_init, Params & params, Controller & controller)
-int put_on_the_floor(FakeRobot* robot, Vector12 const& q_init, Params& params, Controller& controller) {
+int put_on_the_floor(std::shared_ptr<Robot> robot, Vector12 const& q_init, Params & params, Controller & controller) {
+// int put_on_the_floor(FakeRobot* robot, Vector12 const& q_init, Params& params, Controller& controller) {
   printf("PUT ON THE FLOOR\n");
 
   double Kp_pos = 6.;
@@ -72,8 +72,8 @@ int main() {
   Params params = Params();
 
   // Define the robot from a yaml file.
-  // std::shared_ptr<Robot> robot = RobotFromYamlFile(CONFIG_SOLO12_YAML);
-  FakeRobot* robot = new FakeRobot();
+  std::shared_ptr<Robot> robot = RobotFromYamlFile(CONFIG_SOLO12_YAML);
+  // FakeRobot* robot = new FakeRobot();
 
   // Store initial position data.
   Vector12 q_init = Vector12(params.q_init.data());

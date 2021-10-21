@@ -52,8 +52,8 @@ void Controller::initialize(Params& params) {
   FF = params.Kff_main * Vector12::Ones();
 }
 
-// void Controller::compute(std::shared_ptr<odri_control_interface::Robot> robot) {
-void Controller::compute(FakeRobot* robot) {
+void Controller::compute(std::shared_ptr<odri_control_interface::Robot> robot) {
+// void Controller::compute(FakeRobot* robot) {
   // Update the reference velocity coming from the gamepad
   joystick.update_v_ref(k, params_->velID, gait.getIsStatic());
 

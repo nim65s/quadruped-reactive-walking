@@ -63,8 +63,8 @@ class Controller {
   /// \param[in] robot Interface to communicate with the robot
   ///
   ////////////////////////////////////////////////////////////////////////////////////////////////
-  // void compute(std::shared_ptr<odri_control_interface::Robot> robot);
-  void compute(FakeRobot* robot);
+  void compute(std::shared_ptr<odri_control_interface::Robot> robot);
+  // void compute(FakeRobot* robot);
 
   ////////////////////////////////////////////////////////////////////////////////////////////////
   ///
