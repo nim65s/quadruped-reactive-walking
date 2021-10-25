@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.14)
 
 # Project properties
 set(PROJECT_NAMESPACE gepetto)
@@ -31,6 +31,7 @@ project(${PROJECT_NAME} ${PROJECT_ARGS})
 CHECK_MINIMAL_CXX_STANDARD(11 REQUIRED)
 
 # Project dependencies
+find_package(eclipse-paho-mqtt-c QUIET)
 ADD_PROJECT_DEPENDENCY(odri_control_interface REQUIRED)
 ADD_PROJECT_DEPENDENCY(osqp REQUIRED)
 ADD_PROJECT_DEPENDENCY(eiquadprog REQUIRED)
@@ -105,11 +106,13 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC WALK_PARAMETERS_YAML="${PROJEC
 add_library(mqtt-interface SHARED include/qrw/mqtt-interface.hpp src/mqtt-interface.cpp)
 target_include_directories(mqtt-interface PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>)
 
-find_package(eclipse-paho-mqtt-c QUIET)
-if(${eclipse-paho-mqtt-c_FOUND})
+if(eclipse-paho-mqtt-c_FOUND)
+  message(INFO "MQTT found")
   target_link_libraries(mqtt-interface PRIVATE eclipse-paho-mqtt-c::paho-mqtt3c eclipse-paho-mqtt-c::paho-mqtt3a)
 else()
-  add_subdirectory(paho.mqtt.c)
+  message(INFO "MQTT not found. It will be fetched and build")
+  FetchContent_Declare(eclipse-paho-mqtt-c GIT_REPOSITORY https://github.com/eclipse/paho.mqtt.c)
+  FetchContent_MakeAvailable(eclipse-paho-mqtt-c)
   target_link_libraries(mqtt-interface PRIVATE paho-mqtt3c paho-mqtt3a)
 endif()
 
