@@ -6,57 +6,32 @@ Implementation of a reactive walking controller for quadruped robots. Architectu
 
 * Install a Python 3 version (for instance Python 3.6)
 
-* For the following installations each time you see something like "py36", replace it by your Python version ("py35" for instance)
+* For the following installations each time you see something like "py36", replace it by your Python version ("py38" for instance)
 
-* Install Pinocchio: https://stack-of-tasks.github.io/pinocchio/download.html
+* Setup robotpkg binary repository: http://robotpkg.openrobots.org/debian.html
 
-* Install Gepetto Viewer: `sudo apt install robotpkg-py36-qt4-gepetto-viewer-corba`
+* Install ubuntu dependencies: `sudo apt install libyaml-cpp-dev`
 
-* Install robot data: `sudo apt install robotpkg-example-robot-data`
+* Install robotpkg dependencies: `sudo apt install robotpkg-py36-qt5-gepetto-viewer-corba robotpkg-py36-example-robot-data
+  robotpkg-py36-tsid robotpkg-py36-osqp robotpkg-eiquadprog`
 
-* Install Scipy, Numpy, Matplotlib, IPython: `python3.6 -m pip install --user numpy scipy matplotlib ipython`
-
-* Install PyBullet: `pip3 install --user pybullet`
-
-* Install OSQP solver: [https://osqp.org/docs/get_started/sources.html#build-the-binaries]
-    * git clone --recursive https://github.com/oxfordcontrol/osqp
-    * cd osqp
-    * Edit CMakeLists.txt 
-    * Add `set(PRINTING OFF)` just above `message(STATUS "Printing is ${PRINTING}")`
-    * Add `set(PROFILING OFF)` just above `message(STATUS "Profiling is ${PROFILING}")`
-    * Turn DLONG off `option (DLONG "Use long integers (64bit) for indexing" OFF)`
-    * mkdir build
-    * cd build
-    * cmake .. -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=~/install -DPYTHON_EXECUTABLE=$(which python3.6) -DPYTHON_STANDARD_LAYOUT=ON (to install in ~/install folder)
-    * make install
-
-* Install YAML parser for C++: [https://github.com/jbeder/yaml-cpp]
-
-* Install package that handles the gamepad: `pip3 install --user inputs`
-
-* Install eiquadprog: `sudo apt install robotpkg-eiquadprog`
-
-* Install TSID: [https://github.com/stack-of-tasks/tsid#installation] You can put the repo in another folder if you want, like `cd ~/install/` instead of `cd $DEVEL/openrobots/src/` for the first line.
+* Install python dependencies: `python3 -m pip install --user numpy scipy matplotlib ipython pybullet inputs`
 
 * Clone interface repository: in `/scripts`, `git clone https://github.com/paLeziart/solopython`
 
 # Compiling the C++ parts
 
-* Initialize the cmake submodule: `git submodule init`
-
-* Update the cmake submodule: `git submodule udpdate`
+* Initialize the cmake submodule: `git submodule update --init`
 
 * Create a build folder: `mkdir build`
 
-* Get inside and cmake: `cd build` then `cmake .. -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=~/install -DPYTHON_EXECUTABLE=$(which python3.6) -DPYTHON_STANDARD_LAYOUT=ON`
+* Get inside and cmake: `cd build` then `cmake .. -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=~/install -DPYTHON_EXECUTABLE=$(which python3) -DPYTHON_STANDARD_LAYOUT=ON`
 
 * Compile Python bindings: `make`
 
-* Copy them to the script folder so that the scripts can access the compiled code: `cp python/quadruped_reactive_walking/libquadruped_reactive_walking.so ../scripts/`
-
 # Run the simulation
 
-* Run `python3.6 main_solo12_control.py -i test` while being in the `scripts` folder
+* Run `python3 main_solo12_control.py -i test` while being in the `scripts` folder
 
 * Sometimes the parallel process that runs the MPC does not end properly so it will keep running in the background forever, you can manually end all python processes with `pkill -9 python3`
 
