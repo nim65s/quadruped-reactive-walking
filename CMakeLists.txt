@@ -102,10 +102,16 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC CONFIG_SOLO12_YAML="${PROJECT_
 target_compile_definitions(${PROJECT_NAME} PUBLIC WALK_PARAMETERS_YAML="${PROJECT_SOURCE_DIR}/src/walk_parameters.yaml")
 
 # MQTT Interface
-add_subdirectory(paho.mqtt.c)
 add_library(mqtt-interface SHARED include/qrw/mqtt-interface.hpp src/mqtt-interface.cpp)
-target_link_libraries(mqtt-interface PRIVATE paho-mqtt3c paho-mqtt3a)
 target_include_directories(mqtt-interface PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>)
+
+find_package(eclipse-paho-mqtt-c QUIET)
+if(${eclipse-paho-mqtt-c_FOUND})
+  target_link_libraries(mqtt-interface PRIVATE eclipse-paho-mqtt-c::paho-mqtt3c eclipse-paho-mqtt-c::paho-mqtt3a)
+else()
+  add_subdirectory(paho.mqtt.c)
+  target_link_libraries(mqtt-interface PRIVATE paho-mqtt3c paho-mqtt3a)
+endif()
 
 # Main Executable
 # add_executable(${PROJECT_NAMESPACE}-${PROJECT_NAME} src/main.cpp)
