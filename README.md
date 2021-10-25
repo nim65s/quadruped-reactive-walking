@@ -13,7 +13,7 @@ Implementation of a reactive walking controller for quadruped robots. Architectu
 * Install ubuntu dependencies: `sudo apt install libyaml-cpp-dev`
 
 * Install robotpkg dependencies: `sudo apt install robotpkg-py36-qt5-gepetto-viewer-corba robotpkg-py36-example-robot-data
-  robotpkg-py36-tsid robotpkg-py36-osqp robotpkg-eiquadprog`
+  robotpkg-py36-tsid robotpkg-osqp robotpkg-eiquadprog`
 
 * Install python dependencies: `python3 -m pip install --user numpy scipy matplotlib ipython pybullet inputs`
 
@@ -25,7 +25,7 @@ Implementation of a reactive walking controller for quadruped robots. Architectu
 
 * Create a build folder: `mkdir build`
 
-* Get inside and cmake: `cd build` then `cmake .. -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=~/install -DPYTHON_EXECUTABLE=$(which python3) -DPYTHON_STANDARD_LAYOUT=ON`
+* Get inside and configure: `cd build` then `cmake .. -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=~/install -DPYTHON_EXECUTABLE=$(which python3) -DPYTHON_STANDARD_LAYOUT=ON`
 
 * Compile Python bindings: `make`
 

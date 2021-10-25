@@ -1,4 +1,3 @@
-#include "qrw/gepadd.hpp"
 #include "qrw/InvKin.hpp"
 #include "qrw/MPC.hpp"
 #include "qrw/StatePlanner.hpp"
@@ -204,7 +203,7 @@ struct FootTrajectoryGeneratorPythonVisitor : public bp::def_visitor<FootTraject
             // Compute target location of footsteps from Python
             .def("update", &FootTrajectoryGenerator::update, bp::args("k", "targetFootstep"),
                  "Compute target location of footsteps from Python.\n")
-            
+
             // Get flying period of the feet
             .def("getT0s", &FootTrajectoryGenerator::getT0s, "Get the current timings of the flying feet.\n")
             .def("getTswing", &FootTrajectoryGenerator::getTswing, "Get the flying period of the feet.\n");
@@ -230,7 +229,7 @@ struct InvKinPythonVisitor : public bp::def_visitor<InvKinPythonVisitor<InvKin>>
     void visit(PyClassInvKin& cl) const
     {
         cl.def(bp::init<>(bp::arg(""), "Default constructor."))
-            
+
             .def("initialize", &InvKin::initialize, bp::args("params"), "Initialize InvKin from Python.\n")
 
             .def("get_q_step", &InvKin::get_q_step, "Get position step of inverse kinematics.\n")
@@ -413,7 +412,7 @@ struct JoystickPythonVisitor : public bp::def_visitor<JoystickPythonVisitor<Joys
 
             .def("initialize", &Joystick::initialize, bp::args("params"),
                  "Initialize Joystick from Python.\n")
-            
+
             .def("update_v_ref", &Joystick::update_v_ref, bp::args("k", "velID", "gait_is_static", "h_v"), "Update joystick values.")
             .def("getPRef", &Joystick::getPRef, "Get Reference Position")
             .def("getVRef", &Joystick::getVRef, "Get Reference Velocity")
@@ -507,9 +506,6 @@ void exposeParams() { ParamsPythonVisitor<Params>::expose(); }
 /////////////////////////////////
 BOOST_PYTHON_MODULE(libquadruped_reactive_walking)
 {
-    boost::python::def("add", gepetto::example::add);
-    boost::python::def("sub", gepetto::example::sub);
-
     eigenpy::enableEigenPy();
 
     exposeMPC();
