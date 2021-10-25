@@ -18,6 +18,7 @@ if(NOT INSTALL_PYTHON_INTERFACE_ONLY)
 endif()
 
 # JRL-cmakemodule setup
+include(FetchContent)
 include(cmake/base.cmake)
 include(cmake/boost.cmake)
 include(cmake/python.cmake)
