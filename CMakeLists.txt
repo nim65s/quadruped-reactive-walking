@@ -130,6 +130,7 @@ endif()
 
 # Installation
 if(NOT INSTALL_PYTHON_INTERFACE_ONLY)
-  install(TARGETS ${PROJECT_NAME} ${PROJECT_NAMESPACE}-${PROJECT_NAME}
+  install(TARGETS ${PROJECT_NAME} ${PROJECT_NAMESPACE}-${PROJECT_NAME} mqtt-interface
     EXPORT ${TARGETS_EXPORT_NAME} LIBRARY DESTINATION lib RUNTIME DESTINATION bin)
 endif()
+install(PROGRAMS scripts/joystick-launcher/joystick-launcher.py RENAME ${PROJECT_NAMESPACE}-joystick-launcher.py DESTINATION bin)

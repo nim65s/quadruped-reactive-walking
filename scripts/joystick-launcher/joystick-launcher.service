@@ -6,8 +6,8 @@ StartLimitIntervalSec=2
 Type=simple
 Restart=always
 RestartSec=5
-WorkingDirectory=/home/pi/src/quadruped-reactive-walking/scripts/joystick-launcher
-ExecStart=/home/pi/src/quadruped-reactive-walking/scripts/joystick-launcher/joystick-launcher.py
+WorkingDirectory=/home/pi
+ExecStart=/usr/local/bin/gepetto-joystick-launcher.py
 
 [Install]
 WantedBy=multi-user.target
