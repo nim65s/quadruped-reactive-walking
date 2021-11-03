@@ -177,7 +177,7 @@ class Joystick {
 
   // Maximum position values
   double pRollScale = -0.32;  // Lateral
-  double pPitchScale = 0.32;  // Forward
+  double pPitchScale = 0.27;  // Forward
   double pHeightScale = 0.0;  // Raise/Lower the base
   double pYawScale = -0.35;   // Rotation Yaw
 
