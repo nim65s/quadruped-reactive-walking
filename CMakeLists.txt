@@ -122,6 +122,7 @@ endif()
 # add_executable(${PROJECT_NAMESPACE}-${PROJECT_NAME} src/main.cpp)
 add_executable(${PROJECT_NAMESPACE}-${PROJECT_NAME} src/control_solo12.cpp)
 target_link_libraries(${PROJECT_NAMESPACE}-${PROJECT_NAME} ${PROJECT_NAME} mqtt-interface)
+set_target_properties(${PROJECT_NAMESPACE}-${PROJECT_NAME} PROPERTIES INSTALL_RPATH "\$ORIGIN/../lib")
 
 # Python Bindings
 if(BUILD_PYTHON_INTERFACE)
